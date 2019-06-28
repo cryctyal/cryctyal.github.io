@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cryctyal.me/"/>
-  <updated>2018-06-08T15:29:32.000Z</updated>
+  <updated>2019-06-28T05:47:53.889Z</updated>
   <id>http://cryctyal.me/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Kafka学习(一)</title>
+    <link href="http://cryctyal.me/2019/01/01/Kafka%E5%AD%A6%E4%B9%A0(%E4%B8%80)/"/>
+    <id>http://cryctyal.me/2019/01/01/Kafka学习(一)/</id>
+    <published>2019-01-01T01:54:18.000Z</published>
+    <updated>2019-06-28T05:47:53.889Z</updated>
+    
+    <content type="html"><![CDATA[<p>Kafka是什么？</p><a id="more"></a><hr><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Kafka最初由<code>Linkedin</code>公司开发，是一个分布式、支持分区的、多副本的，基于zookeeper协调的分布式消息系统，它的最大的特性就是可以实时的处理大量数据以满足各种需求场景：比如基于hadoop的批处理系统、低延迟的实时系统、storm/Spark流式处理引擎，web/nginx日志、访问日志，消息服务等等，用scala语言编写，Linkedin于2010年贡献给了Apache基金会并成为顶级开源项目。</p><h3 id="Kafka是什么？"><a href="#Kafka是什么？" class="headerlink" title="Kafka是什么？"></a>Kafka是什么？</h3><ul><li>Kafka是一个流平台，在Kafka上可以发布和订阅流数据，并把它们保存起来、进行处理。</li><li>Kafka是一个分布式系统[^分布式系统]，以集群(支持自由伸缩)的方式运行，所以我们总称为分布式消息队列。</li><li>Kafka可以用来存储数据，数据存储的时间长短由你自己定义，并且只要数据还存储在Kafka中，你可以重复读取。</li><li>Kafka可以看成是实时版的Hadoop：<ul><li>Hadoop可以存储和定期处理大量的数据文件，而Kafka而可以存储和持续型的处理大型的数据流。</li><li>Hadoop主要应用于数据分析上，而Kafka因其低延迟的特点更合适应用于核心业务上，业务事件发生时，Kafka能够针对这些事件及时做出相应。</li></ul></li></ul><h3 id="kafka的核心思想"><a href="#kafka的核心思想" class="headerlink" title="kafka的核心思想"></a>kafka的核心思想</h3><p>Kafka的核心思想就是把消息全部存成一个有序日志，所有的Producer把消息发布到底端，从某一个逻辑上的位移开始顺序读取所有的消息。</p><p><img src="1.png" alt="logo"></p><h3 id="Kafka集群结构"><a href="#Kafka集群结构" class="headerlink" title="Kafka集群结构"></a>Kafka集群结构</h3><p>我们看下一Kafka的集群架构，如下图：<br><img src="2.png" alt="logo"></p><p>首先有两个名词定义：Producer和Consumer</p><ul><li>Producer：向Kafka Topic发布消息的程序。</li><li>Consumer：预订Topic并消费消息的程序。</li></ul><p>这里又引出了Topic的定义：</p><ul><li>Topic：Kafka将消息以Topic为单位进行归纳，即消息的目录/主题。 </li></ul><p><strong>讲个故事</strong></p><blockquote><p>我们平时看的知乎，里面有一些知乎主题，大家把与主题相关的内容都发布这个主题板块，如果你喜欢这个主题，可以点击关注主题，这样可以得到主题的最新的消息。<br>有一天，老师让大家做一个关于中国历史各朝代皇帝的研究，同学们需要去寻找资料。大家发现知乎上有很多类似的话题，有商朝的，有唐朝的，有明朝的……每个朝代都分成了一个个主题，于是大家决定分配，每个人一个主题去研究。</p><ul><li>这里知乎的主题相当于Kafka的Topic，是一堆消息的集合或者说是分类</li><li>在主题中发布内容的大牛相当于Kafka的Producer。</li><li>订阅主题，接受消息的学生相当于Kafka的Consumer。<br><strong>注意：有一个区别是知乎中的用户是被动推送的消息的，而Kafka中的Consumer是主动拉取消息的，这个我们后面会具体阐述。</strong></li></ul></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Kafka是什么？&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://cryctyal.me/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Kafka" scheme="http://cryctyal.me/tags/Kafka/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>toB的产品设计</title>
+    <link href="http://cryctyal.me/2018/12/28/toB%E7%9A%84%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1/"/>
+    <id>http://cryctyal.me/2018/12/28/toB的产品设计/</id>
+    <published>2018-12-28T04:54:18.000Z</published>
+    <updated>2019-06-28T05:05:52.654Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近有一些思考，谁为我们的产品买单，买单的人主要关注什么？</p><a id="more"></a><p>我们的DMP产品，功能越来越强大，操作越来越复杂。当我们忙着武装这个产品时，回过头来，发现它其实并不易用。于是，我们开始忙着把功能操作优化地更加友好，更加亲切。做着做着，发现它太难了，它就是这么复杂，往往把功能做的易用比实现这个功能的逻辑来的更加复杂和需要更多的资源投入。</p><blockquote><p>我慢下脚步，开始思考：</p><ul><li>客户在意这些么？</li><li>客户会为这么优化买单么？</li><li>客户真正在意的是什么？</li><li>我们产品的竞争力是什么？卖点是什么？</li><li>傻瓜式的操作体验会是加分项和护城河么？</li></ul></blockquote><p><strong>谁为这个产品买单？</strong><br>我想应该是客户那边的大老板吧。</p><p><strong>他会频繁操作我们的DMP么？</strong><br>我觉得答案是显而易见的。</p><p><strong>他在意的功能是什么？</strong><br>我觉得是各种报告。可能是给他的领导汇报使用，最好是Download下来可以直接贴进PPT的那种。<br>我理解，一般来说职位越高，看的维度就越少，CEO可能就只看看几个财报数字。</p><p>所以我觉得，一款数据产品，进去看到的肯定是各种报告，满屏的报告。<br>客户想得到的，想不到，已知的，会surprise的，应有尽有！<br>他会沉醉在报表中，惊讶于一些意想不到的发现和隐藏的商机。<br>他会觉得有用，他会觉得产品值钱。</p><p>这些报告怎么来的，是产品算出来的，是运营配置的。<br>客户会在意运营每天加班到11点，吐槽产品难用么？<br>我想可能会，但他一定是欣喜于报告中的发现，考虑运营的效率是否不够高还是需要再加一个人。<br>最终他可能会加钱，让我们的产品美一些，好用一些。<br>但他不会因此而替换掉我们的产品。</p><p>所以我觉得护城河，是数据的应用，是报告的分析，是给客户的surprise。<br>而操作的难度，令人抓狂的交互，就默默地留在后面，让运营再痛苦一会儿吧。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近有一些思考，谁为我们的产品买单，买单的人主要关注什么？&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="思考" scheme="http://cryctyal.me/categories/%E6%80%9D%E8%80%83/"/>
+    
+    
+      <category term="学习体会" scheme="http://cryctyal.me/tags/%E5%AD%A6%E4%B9%A0%E4%BD%93%E4%BC%9A/"/>
+    
+  </entry>
   
   <entry>
     <title>网络协议(二)</title>
