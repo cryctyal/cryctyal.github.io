@@ -119,7 +119,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://cryctyal.me/2018/08/01/Kafka学习(一)/1.png">
 <meta property="og:image" content="http://cryctyal.me/2018/08/01/Kafka学习(一)/2.png">
-<meta property="og:updated_time" content="2019-06-28T05:54:37.052Z">
+<meta property="og:updated_time" content="2019-06-28T05:58:12.817Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka学习(一)">
 <meta name="twitter:description" content="Kafka是什么？">
@@ -475,10 +475,10 @@
 <li>Kafka是一个流平台，在Kafka上可以发布和订阅流数据，并把它们保存起来、进行处理。</li>
 <li>Kafka是一个分布式系统[^分布式系统]，以集群(支持自由伸缩)的方式运行，所以我们总称为分布式消息队列。</li>
 <li>Kafka可以用来存储数据，数据存储的时间长短由你自己定义，并且只要数据还存储在Kafka中，你可以重复读取。</li>
-<li>Kafka可以看成是实时版的Hadoop：<ul>
+<li>Kafka可以看成是实时版的Hadoop：<ol>
 <li>Hadoop可以存储和定期处理大量的数据文件，而Kafka而可以存储和持续型的处理大型的数据流。</li>
 <li>Hadoop主要应用于数据分析上，而Kafka因其低延迟的特点更合适应用于核心业务上，业务事件发生时，Kafka能够针对这些事件及时做出相应。</li>
-</ul>
+</ol>
 </li>
 </ul>
 <h3 id="kafka的核心思想"><a href="#kafka的核心思想" class="headerlink" title="kafka的核心思想"></a>kafka的核心思想</h3><p>Kafka的核心思想就是把消息全部存成一个有序日志，所有的Producer把消息发布到底端，从某一个逻辑上的位移开始顺序读取所有的消息。</p>
