@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Kafka学习(六)]]></title>
+    <url>%2F2018%2F11%2F29%2FKafka%E5%AD%A6%E4%B9%A0(%E5%85%AD)%2F</url>
+    <content type="text"><![CDATA[Kafka的几个特性 高吞吐量、低延迟：kafka每秒可以处理几十万条消息，它的延迟最低只有几毫秒，每个topic可以分多个partition, consumer group 对partition进行consume操作。 可扩展性：kafka集群支持热扩展。 持久性、可靠性：消息被持久化到本地磁盘，并且支持数据备份防止数据丢失。 容错性：允许集群中节点失败（若副本数量为n,则允许n-1个节点失败）。 高并发：支持数千个客户端同时读写。 一、可用性说到可用性，首先我们先学习一下Replica。 ReplicaKafka作为这么重要环节，如何保证高可用。 Kafka每个Partition的数据都会有多份Repalica，以此来保证Kafka的高可用。 Topic、Partition、Replica的关系如下图： Topic下会划分多个Partition，每个Partition都有自己的Replica，其中只有一个是Leader Replica，其余的是Follower Replica。 消息进来的时候会先存入Leader Replica，然后从Leader Replica复制到Follower Replica。只有复制全部完成时，Consumer才可以消费此条消息。这是为了确保意外发生时，数据可以恢复。Consumer的消费也是从Leader Replica读取的。 由此可见，Leader Replica做了大量的工作。所以如果不同Partition的Leader Replica在Kafka集群的Broker上分布不均匀，就会造成负载不均衡。 那么Kafka是如何保证负载均衡的呢？ Kafka通过轮询算法证Leader Replica是均匀分布在多个Broker上。如下图。 通过上图可以看到，每个Broker都只有一个Leader和一个Follower，都是均匀分布的。 关于Replica，有以下需要注意的： Replica均匀分配在Broker上，同一个Partition的Replica不会在同一个Broker上。（为了负载均衡） 同一个Partition的Replica数量不能多于Broker数量（否则就无法满足第一条）。 分区的Leader Replica均衡分布在Broker上。（这就叫做分区平衡） 分区平衡是个很重要的概念，接下来我们就来讲解分区平衡。 分区平衡 在讲分区平衡前，先讲几个概念： 1.AR： Assigned Replicas，已分配的副本。每个Partition都有自己的AR列表，里面存储着这个Partition最初分配的所有Replicas。AR列表一般不会变化，除非增加分区。 2.PR：优先Replicas。AR列表中的第一个Replicas就是优先Replicas，而且永远是优先Replicas。最初，优先Replicas和Leader Replicas是同一个Replicas。 3.ISR：In Sync Replicas，同步副本。每个Partition都有自己的ISR列表。ISR是会根据同步情况动态变化的。 最初ISR列表和AR列表是一致的，但由于某个节点死掉，或者某个节点的Follower Replicas落后Leader Replicas太多，那么该节点就会被从ISR列表中移除。此时，ISR和AR就不再一致。 接下来我们通过一个例子来理解分区平衡。 1.根据以上信息，一个拥有3个Replicas的Partition，最初是下图的样子。 可以看到AR和ISR保持一致，并且初始时刻优先副本和Leader副本都指向Replica 0. 2.接下来，Replica 0所在的机器下线了，那么情况会变成如下图所示： 可以看到Replica 0已经从ISR中移除掉了。同时，由于重新选举，Leader副本变成了Replica 1，而优先副本还是Replica 0。优先副本是不会改变的。 由于最初时，Leader副本在Broker均匀分布，分区是平衡的。但此时，由于此Partition的Leader副本换成了另外一个，所以此时分区平衡已经被破坏。 3.Replica 0所在的机器修复了，又重新上线，情况如下图： 可以看到Replica 0重新回到ISR列表中，不过此时他没能恢复Leader的身份。只能作为Follower当一名小弟。 此时分区依旧是不平衡的。那是否意味着分区永远都会不平衡下去呢？不是的。 4.Kafka会定时触发分区平衡操作，也可以主动触发分区平衡。这就是所谓的分区平衡操作，操作完后如下图。 可以看到此时Leader副本通过选举，会重新变回来replica 0，因为Replica 0是优先副本，其实优先的含义就是选择Leader时被优先选择。这样整个分区又回到了初始状态，而初始时，Leader副本是均匀分布的。此时已经分区平衡了。 由此可见，分区平衡操作就是使Leader副本和优先副本保持一致的操作。可以把优先副本理解为分区的平衡状态位，平衡操作就是让Leader副本归位。 如果你还是没有看明白，那我再给你讲一个故事 在班级里，老师按照考试分数选举班长，分数最好的的当班长。 AR就是老师的老师的班长选举顺序，ISR就是最近一次的考试分数列表。 刚开始学生A考的最好（Leader副本），所以学生A就当班长的最优人选（优先副本）。 第二次考试，学生A肚子不舒服，没有完整参加考试，有一门没有考。那这时学生A的分数肯定不算了（不在ISR列表中）。学生B考的最好（Leader副本），可是在老师和同学心目中，学生A才是最优人选啊（优先副本），怎么办呢？ 为了公平，老师决定老学生A补完没参加的那门考试，所以学生A最终的分数，又可以出现在分数列表中了（ISR）。 学生A还是很厉害的，不负所望还是考了第一，所以学生A还是这一次考的最好的（Leader副本）。也还是班长最优人选（优先副本）。 所以老师起到了分区平衡的作用，平衡了班级的氛围和公平竞争的规则！！！ 二、一致性上面的方案保证了数据高可用，有时高可用是体现在对一致性的牺牲上。如果希望达到强一致性，可以采取如下措施： 禁用脏leader选举，ISR没有node时，宁可不提供服务也不要未完全同步的node。 设置最小ISR数量min_isr，保证消息至少要被min_isr个node确认才能提交。 三、持久化kafka使用文件存储消息（Append Only Log），就是把这些消息全部存成一个有序日志，所有的消息发布者把消息发布到底端，从某一个逻辑上的位移开始顺序读取所有的消息。它的一个好处在于所有的读和写，尽管都是刷到磁盘上，但都是按照顺序进行，该方式对磁盘的使用比较有效。 文件缓存/直接内存映射等是常用的手段，因为Kafka是对日志文件进行Append操作，因此磁盘检索的开支是较小的。 同时为了减少磁盘写入的次数,Broker会将消息暂时Buffer起来，当消息的个数(或尺寸)达到一定阀值时，再Flush到磁盘，这样减少了磁盘IO调用的次数。对于Kafka而言，较高性能的磁盘，会带来更加直接的性能提升。 四、延展性如下图，Kafka提供Topic以及Partitions。每个用户有不同的Topic，每个Topic可以有多个Partitions，每个Partitions可被装载在不同的机器上。当用户提高规模之后，Kafka 只需要简单地增加机器和 Topic Partitions 数量，即可达到线性延展方式。]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Kafka</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Kafka学习(五)]]></title>
+    <url>%2F2018%2F10%2F25%2FKafka%E5%AD%A6%E4%B9%A0(%E4%BA%94)%2F</url>
+    <content type="text"><![CDATA[作为消息系统，Kafka是如何保证Consumer不会因为自身原因而漏消费消息呢？ Kafka将所有消息组织成多个Topic的形式存储，而每个Topic又可以拆分成多个Partition，每个Partition又由一个一个消息组成。每个消息都被标识了一个递增序列号代表其进来的先后顺序，并按顺序存储在Partition中。 这样，消息就以一个个id的方式，组织起来。 Consumer选择一个Topic，通过id指定从哪个位置开始消费消息。消费完成之后保留id，下次可以从这个位置开始继续消费，也可以从其他任意位置开始消费。上面的id在Kafka中称为Offset，这种组织和处理策略提供了如下好处： 消费者可以根据需求，灵活指定Offset消费。保证了消息不变性，为并发消费提供了线程安全的保证。每个Consumer都保留自己的Offset，互相之间不干扰，不存在线程安全问题。 讲个故事： 同学们被分配好了要研究的皇帝，开始转心的研究起来。可是要放学了，怎么记录上次研究到了哪一个地方呢？还好知乎提供了“页数”的功能，只要在底下跳转到哪一页就可以了。可是每次自己输入页数很麻烦，还要自己记住（Low Level API）！还好知乎的高级用户—会员，知乎会自动填充页数，不需要自己输入（High Level API）！ 我们再看下这张图，加深印象： 再加入几个知识点： 每个Partition都是有序的不可变的。 Kafka可以保证Partition的消费顺序，但不能保证Topic消费顺序。 无论消费与否，保留周期默认两天（可配置）。 每个Consumer维护的唯一元数据是Offset，代表消费的位置，一般线性向后移动。 Consumer也可以重置Offset到之前的位置，可以以任何顺序消费，不一定线性后移。]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Kafka</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Kafka学习(四)]]></title>
+    <url>%2F2018%2F10%2F22%2FKafka%E5%AD%A6%E4%B9%A0(%E5%9B%9B)%2F</url>
+    <content type="text"><![CDATA[Kafka的Reblance策略。 Group中的Consumer是如何配合协调的呢？ ReblanceKafka有两种Reblance策略： Range Strategy：范围分区 RoundRobin Strategy：轮询分区 我们分别学习一下！ 一、Range StrategyRange 策略是对每个Topic而言的，首先对同一个Topic里面的Partition按照序号进行排序，并对Consumer按照字母顺序进行排序。 讲个故事： 小组分到的朝代有 10 个皇帝， 一共有3 个同学，排完序的皇帝是 0, 1, 2, 3, 4, 5, 6, 7, 8, 9；同学按照学号排序是C0, C1, C2。然后将皇帝的个数除于同学的总数来决定每个同学研究几个皇帝。如果除不尽，那么前面几个同学将会多研究一个皇帝。如果是有10个皇帝，那么结果就是：c0：0,1,2,3c1：4,5,6c2：7,8,9如果是有11个皇帝，那么结果就是：c0：0,1,2,3c1：4,5,6,7c2：8,9,10假如小组要研究两个朝代唐朝和宋朝，分别有10个皇帝，最后的分配结果将会是这样：C0：唐朝（0，1，2，3） 宋朝（0，1，2，3）C0：唐朝（4，5，6） 宋朝（4，5，6）C0：唐朝（7，8，9） 宋朝（7，8，9） 这样的分配策略弊端就是前面的Consumer者需要消费更多的Partition消息，负载更高，不平衡。 二、RoundRobin Strategy轮询分区策略是把所有的Partition和Consumer列出来，然后轮询Consumer和Partition，尽可能的让把Partition均匀的分配给Consumer。 讲个故事：* 假如有3个朝代 T0（三个皇帝P0-0，P0-1,P0-2），T1(两个皇帝P1-0,P1-1)，T2(四个皇帝P2-0，P2-1，P2-2，P2-3)有三个同学：C0(倾向于T0，T1),C1（倾向于T1，T2），C2(倾向于T0,T2)那么分区过程如下图所示 ：皇帝将会按照一定的顺序排列起来，同学按照倾向一个一个分配。P0-0分配给C0P0-1分配给C1但是C1并没订阅T0，于是跳过C1把P0-1分配给C2P0-2分配给C0P1-0分配给C1P1-1分配给C2但是C2并没订阅T1，于是跳过C2把P1-1分配给C0P2-0分配给C1P2-1分配给C2P2-2分配给C0但是C0并没订阅T2，于是跳过C0把P2-2分配给C1p2-3分配给C2所以结果就是：C0：P0-0，P0-2，P1-1C1：P1-0，P2-0，P2-2C2：P0-1，P2-1，P2-3 什么时候会触发Reblance策略重新分区？ Consumer增加或删除。 Partition的增加或者减少。 Broker的增加或者减少。]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Kafka</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Kafka学习(三)]]></title>
+    <url>%2F2018%2F09%2F29%2FKafka%E5%AD%A6%E4%B9%A0(%E4%B8%89)%2F</url>
+    <content type="text"><![CDATA[同学们已经分成小组学习了，但是小组内部怎么分呢？大家决定按照每个朝代的皇帝区分，这样可以把每个朝代的内容划分的更清楚。为了保证保证不会重复研究，每个皇帝只能被一位同学研究。可是有的小组同学人数不够，或者皇帝太多了怎么办呢？那就学习能力强的学霸多研究一些。学霸能力强，但是研究的数量比较多，效率肯定会有折扣，肯定比不上专心致志研究一位皇帝的同学。由于这种分配方式，小组内的同学肯定不会比被研究的皇帝还多，否则会有同学没有研究任务的情况出现。 在Kafka学习(二)中，我们说到同学们为了保证不重复研究同样的朝代，决定分组研究。那小组内的同学如何分工呢？如何保证小组内的同学不研究重复的内容呢？ 这里，就需要学习Kafka的一个核心概念 — Kafka如何保证高吞吐量。 Partition Kafka采用Partition的方式，使得Consumer能够做到并行消费，从而大大提高了自己的吞吐能力。 首先我们解释一下Partition的定义： Partition：Topic物理上的分组，一个Topic可以分为多个Partition，每个Partition是一个有序的队列。 Kafka中同一个Topic下的消息，存储在一个队列。Partition的概念就是把这个队列划分为若干个小队列，每一个小队列就是一个分区，如下图： 这样做的好处是什么呢？其实从上图已经可以看出来。无Partition时，一个Topic只有一个Consumer在消费这个消息队列。采用Partition后，如果有两个Partition，最多两个Consumer同时消费，消费的速度肯定会更快。如果觉得不够快，可以加到四个Partition，让四个Consumer并行消费。分区的设计大大的提升了kafka的吞吐量！！ 我们再结合下图继续学习Partition： 上图包含如下几个知识点： 一个Partition只能被同组的一个Consumer消费（图中只会有一个箭头指向一个Partition） 同一个组里的一个Consumer可以消费多个Partition（图中第一个Consumer消费Partition 0和3） 消费效率最高的情况是Partition和Consumer数量相同。这样确保每个Consumer专职负责一个Partition。 Consumer数量不能大于Partition数量。由于第一点的限制，当Consumer多于Partition时，就会有Consumer闲置。 Consumer Group可以认为是一个订阅者的集群，其中的每个Consumer负责自己所消费的Partition 我们再按照故事的方式总结一下： 讲个故事 同学们已经分成小组学习了，但是小组内部怎么分呢？大家决定按照每个朝代的皇帝区分，这样可以把每个朝代的内容划分的更清楚。 为了保证保证不会重复研究，每个皇帝只能被一位同学研究（一个Partition只能被同组的一个Consumer消费） 可是有的小组同学人数不够，或者皇帝太多了怎么办呢？那就学习能力强的学霸多研究一些（同一个组里的一个Consumer可以消费多个Partition） 学霸能力强，但是研究的数量比较多，效率肯定会有折扣，肯定比不上专心致志研究一位皇帝的同学。（消费效率最高的情况是Partition和Consumer数量相同。这样确保每个Consumer专职负责一个Partition。） 由于这种分配方式，小组内的同学肯定不会比被研究的皇帝还多，否则会有同学没有研究任务的情况出现。（Consumer数量不能大于Partition数量。）]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Kafka</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Kafka学习(二)]]></title>
+    <url>%2F2018%2F09%2F12%2FKafka%E5%AD%A6%E4%B9%A0(%E4%BA%8C)%2F</url>
+    <content type="text"><![CDATA[本来同学们分配的是每个人一个主题去研究，后来发现，内容太多了！怎么合理分配及时看完所有的主题并且保证不会浪费时间，即一个主题不会让多位同学研究呢？于是大家想到了分小组，A组看商朝的、B组看明朝的……这样一个主题看的人多了，研究起来也快了。 一、Kafka和其它消息系统有一个不一样的设计在Consumer之上加了一层Group。同一个Group的Consumer可以并行消费同一个topic的消息，但是同Group的Consumer，不会重复消费。如果同一个Topic需要被多次消费，可以通过设立多个Consumer Group来实现。每个Group分别消费，互不影响。 这就好比多个Consumer组成了一个团队，一起干活，当然干活的速度就上来了。 我们再看下面的架构图，可以发现Broker有一个角标，Leader和Follower，这是怎么回事呢？ 我们把集群架构剩下的几个名字定义解释一下： Broker：Kafka以集群的方式运行，可以由一个或多个服务组成，每个服务叫做一个Broker；一个Kafka节点就是一个Broker，多个Broker可以组成一个Kafka集群。Zookeeper集群：ZooKeeper是一个分布式的、分层级的文件系统，能促进客户端间的松耦合，并提供最终一致。 二、Kakfa Broker Leader的选举：Kakfa Broker集群受Zookeeper管理。所有的Kafka Broker节点一起去Zookeeper上注册一个临时节点，因为只有一个Kafka Broker会注册成功，其他的都会失败，所以这个成功在Zookeeper上注册临时节点的这个Kafka Broker会成为Kafka Broker Leader，其他的Kafka broker叫Kafka Broker Follower。 这个Leader会监听其他的Kafka Broker的所有信息，如果这个Kafka Broker Follower宕机了，在zookeeper上面的那个临时节点就会消失，此时所有的Kafka Broker又会一起去Zookeeper上注册一个临时节点。 三、Push模式和Pull模式这里你可能会有一个疑问，消息可以拉取，也可以被推送。在Kafka中，为什么Consumer是拉取消息而不是被推送消息呢？ 事实上，Push模式和Pull模式各有优劣。 Push模式很难适应消费速率不同的Consumer者，因为消息发送速率是由Broker决定的。Push模式的目标是尽可能以最快速度传递消息，但是这样很容易造成Consumer来不及处理消息，典型的表现就是拒绝服务以及网络拥塞。而Pull模式则可以根据Consumer的消费能力以适当的速率消费消息。]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Kafka</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Kafka学习(一)]]></title>
     <url>%2F2018%2F08%2F01%2FKafka%E5%AD%A6%E4%B9%A0(%E4%B8%80)%2F</url>
     <content type="text"><![CDATA[Kafka是什么？ 简介Kafka最初由Linkedin公司开发，是一个分布式、支持分区的、多副本的，基于zookeeper协调的分布式消息系统，它的最大的特性就是可以实时的处理大量数据以满足各种需求场景：比如基于hadoop的批处理系统、低延迟的实时系统、storm/Spark流式处理引擎，web/nginx日志、访问日志，消息服务等等，用scala语言编写，Linkedin于2010年贡献给了Apache基金会并成为顶级开源项目。 Kafka是什么？ Kafka是一个流平台，在Kafka上可以发布和订阅流数据，并把它们保存起来、进行处理。 Kafka是一个分布式系统[^分布式系统]，以集群(支持自由伸缩)的方式运行，所以我们总称为分布式消息队列。 Kafka可以用来存储数据，数据存储的时间长短由你自己定义，并且只要数据还存储在Kafka中，你可以重复读取。 Kafka可以看成是实时版的Hadoop： Hadoop可以存储和定期处理大量的数据文件，而Kafka而可以存储和持续型的处理大型的数据流。 Hadoop主要应用于数据分析上，而Kafka因其低延迟的特点更合适应用于核心业务上，业务事件发生时，Kafka能够针对这些事件及时做出相应。 kafka的核心思想Kafka的核心思想就是把消息全部存成一个有序日志，所有的Producer把消息发布到底端，从某一个逻辑上的位移开始顺序读取所有的消息。 Kafka集群结构我们看下一Kafka的集群架构，如下图： 首先有两个名词定义：Producer和Consumer Producer：向Kafka Topic发布消息的程序。 Consumer：预订Topic并消费消息的程序。 这里又引出了Topic的定义： Topic：Kafka将消息以Topic为单位进行归纳，即消息的目录/主题。 讲个故事 我们平时看的知乎，里面有一些知乎主题，大家把与主题相关的内容都发布这个主题板块，如果你喜欢这个主题，可以点击关注主题，这样可以得到主题的最新的消息。有一天，老师让大家做一个关于中国历史各朝代皇帝的研究，同学们需要去寻找资料。大家发现知乎上有很多类似的话题，有商朝的，有唐朝的，有明朝的……每个朝代都分成了一个个主题，于是大家决定分配，每个人一个主题去研究。 这里知乎的主题相当于Kafka的Topic，是一堆消息的集合或者说是分类 在主题中发布内容的大牛相当于Kafka的Producer。 订阅主题，接受消息的学生相当于Kafka的Consumer。注意：有一个区别是知乎中的用户是被动推送的消息的，而Kafka中的Consumer是主动拉取消息的，这个我们后面会具体阐述。]]></content>

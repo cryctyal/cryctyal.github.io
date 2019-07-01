@@ -101,7 +101,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://cryctyal.me/2018/08/01/Kafka学习(一)/1.png">
 <meta property="og:image" content="http://cryctyal.me/2018/08/01/Kafka学习(一)/2.png">
-<meta property="og:updated_time" content="2019-06-29T11:49:34.877Z">
+<meta property="og:updated_time" content="2019-07-01T05:20:37.686Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka学习(一)">
 <meta name="twitter:description" content="Kafka是什么？">
@@ -448,7 +448,9 @@
       
 
       
-        <p>Kafka是什么？</p>
+        <blockquote>
+<p>Kafka是什么？</p>
+</blockquote>
 <a id="more"></a>
 <hr>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Kafka最初由<code>Linkedin</code>公司开发，是一个分布式、支持分区的、多副本的，基于zookeeper协调的分布式消息系统，它的最大的特性就是可以实时的处理大量数据以满足各种需求场景：比如基于hadoop的批处理系统、低延迟的实时系统、storm/Spark流式处理引擎，web/nginx日志、访问日志，消息服务等等，用scala语言编写，Linkedin于2010年贡献给了Apache基金会并成为顶级开源项目。</p>
@@ -463,8 +465,8 @@
 </li>
 </ul>
 <h2 id="kafka的核心思想"><a href="#kafka的核心思想" class="headerlink" title="kafka的核心思想"></a>kafka的核心思想</h2><p>Kafka的核心思想就是把消息全部存成一个有序日志，所有的Producer把消息发布到底端，从某一个逻辑上的位移开始顺序读取所有的消息。</p>
-<p><img src="1.png" alt="logo"></p>
-<h2 id="Kafka集群结构"><a href="#Kafka集群结构" class="headerlink" title="Kafka集群结构"></a>Kafka集群结构</h2><p>我们看下一Kafka的集群架构，如下图：<br><img src="2.png" alt="logo"></p>
+<p><img src="1.png" alt></p>
+<h2 id="Kafka集群结构"><a href="#Kafka集群结构" class="headerlink" title="Kafka集群结构"></a>Kafka集群结构</h2><p>我们看下一Kafka的集群架构，如下图：<br><img src="2.png" alt></p>
 <p>首先有两个名词定义：Producer和Consumer</p>
 <ul>
 <li>Producer：向Kafka Topic发布消息的程序。</li>
@@ -552,6 +554,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/09/12/Kafka学习(二)/" rel="prev" title="Kafka学习(二)">
+                Kafka学习(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -634,7 +640,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -800,7 +806,7 @@
     
       <span class="post-meta-item-text">全站总字数&#58;</span>
     
-    <span title="全站总字数">6.4k</span>
+    <span title="全站总字数">11.1k</span>
   
 </div>
 
