@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cryctyal.me/"/>
-  <updated>2019-07-01T05:53:47.328Z</updated>
+  <updated>2020-01-21T04:15:57.406Z</updated>
   <id>http://cryctyal.me/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>音乐分享</title>
+    <link href="http://cryctyal.me/2020/01/21/%E9%9F%B3%E4%B9%90%E5%88%86%E4%BA%AB/"/>
+    <id>http://cryctyal.me/2020/01/21/音乐分享/</id>
+    <published>2020-01-20T23:20:05.000Z</published>
+    <updated>2020-01-21T04:15:57.406Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>        <div id="aplayer-lzGszySS" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">            <pre class="aplayer-lrc-content"></pre>        </div>        <script>          var ap = new APlayer({            element: document.getElementById("aplayer-lzGszySS"),            narrow: false,            autoplay: false,            showlrc: false,            music: {              title: "倒带",              author: "小仙女",              url: "http://lc-gtwanmvr.cn-n1.lcfile.com/2d9f0d4d6c2b618751a2/《倒带》.m4aautoplay",              pic: "",              lrc: ""            }          });          window.aplayers || (window.aplayers = []);          window.aplayers.push(ap);        </script> ]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+      <category term="笔记" scheme="http://cryctyal.me/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Kafka学习(六)</title>
@@ -225,35 +248,6 @@
       &lt;blockquote&gt;
 &lt;p&gt;工作中经常会遇到PaaS、SaaS这样的专用名词，一直很困惑，对于它们之间的区别也不清楚，所以我从网上整理了相关的介绍，作为笔记时刻阅读。&lt;/p&gt;
 &lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="笔记" scheme="http://cryctyal.me/categories/%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="IaaS" scheme="http://cryctyal.me/tags/IaaS/"/>
-    
-      <category term="PaaS" scheme="http://cryctyal.me/tags/PaaS/"/>
-    
-      <category term="SaaS" scheme="http://cryctyal.me/tags/SaaS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>音乐分享</title>
-    <link href="http://cryctyal.me/2018/06/04/%E9%9F%B3%E4%B9%90%E5%88%86%E4%BA%AB/"/>
-    <id>http://cryctyal.me/2018/06/04/音乐分享/</id>
-    <published>2018-06-03T23:20:05.000Z</published>
-    <updated>2020-01-21T04:12:50.537Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>        <div id="aplayer-hdnxjZTV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">            <pre class="aplayer-lrc-content"></pre>        </div>        <script>          var ap = new APlayer({            element: document.getElementById("aplayer-hdnxjZTV"),            narrow: false,            autoplay: false,            showlrc: false,            music: {              title: "倒带",              author: "陈奕迅",              url: "http://lc-gtwanmvr.cn-n1.lcfile.com/2d9f0d4d6c2b618751a2/《倒带》.m4aautoplay",              pic: "",              lrc: ""            }          });          window.aplayers || (window.aplayers = []);          window.aplayers.push(ap);        </script> ]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;/assets/css/APlayer.min.css&quot;&gt;&lt;script src=&quot;/assets/js/APlayer.min.js&quot; cla
-      
     
     </summary>
     
