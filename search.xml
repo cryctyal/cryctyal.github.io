@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[心情分享]]></title>
     <url>%2F2020%2F01%2F21%2F%E5%BF%83%E6%83%85%E5%88%86%E4%BA%AB%2F</url>
-    <content type="text"><![CDATA[今天听到了一首非常好听的歌曲，整个人一天都开心起来了，所以想和大家分享一下。 var ap = new APlayer({ element: document.getElementById("aplayer-NUbRiSfg"), narrow: false, autoplay: true, showlrc: false, music: { title: "倒带", author: "小仙女", url: "http://lc-gtwanmvr.cn-n1.lcfile.com/2d9f0d4d6c2b618751a2/《倒带》.m4a", pic: "http://lc-gTWANMvR.cn-n1.lcfile.com/fcc8b0b477df14d76794/100.jpeg", lrc: "" } }); window.aplayers || (window.aplayers = []); window.aplayers.push(ap);]]></content>
+    <content type="text"><![CDATA[今天听到了一首非常好听的歌曲，整个人一天都开心起来了，所以想和大家分享一下。 var ap = new APlayer({ element: document.getElementById("aplayer-mwkPTVoo"), narrow: false, autoplay: true, showlrc: false, music: { title: "倒带", author: "小仙女", url: "http://lc-gtwanmvr.cn-n1.lcfile.com/2d9f0d4d6c2b618751a2/《倒带》.m4a", pic: "http://lc-gTWANMvR.cn-n1.lcfile.com/fcc8b0b477df14d76794/100.jpeg", lrc: "" } }); window.aplayers || (window.aplayers = []); window.aplayers.push(ap);]]></content>
       <categories>
         <category>分享</category>
       </categories>
