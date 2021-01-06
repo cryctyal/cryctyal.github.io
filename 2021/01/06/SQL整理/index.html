@@ -91,17 +91,17 @@
 
 
 
-<meta name="description" content="SQL整理总结">
+<meta name="description" content="HiveSql、PostgreSql、Hadoop命令">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL整理">
+<meta property="og:title" content="常用命令整理">
 <meta property="og:url" content="http://cryctyal.me/2021/01/06/SQL整理/index.html">
 <meta property="og:site_name" content="鲸泠">
-<meta property="og:description" content="SQL整理总结">
+<meta property="og:description" content="HiveSql、PostgreSql、Hadoop命令">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-01-06T06:04:27.982Z">
+<meta property="og:updated_time" content="2021-01-06T07:31:13.616Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL整理">
-<meta name="twitter:description" content="SQL整理总结">
+<meta name="twitter:title" content="常用命令整理">
+<meta name="twitter:description" content="HiveSql、PostgreSql、Hadoop命令">
 
 
 
@@ -146,7 +146,7 @@
   daovoice('update');
   </script>
 
-  <title>SQL整理 | 鲸泠</title>
+  <title>常用命令整理 | 鲸泠</title>
   
 
 
@@ -331,7 +331,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SQL整理</h1>
+          <h1 class="post-title" itemprop="name headline">常用命令整理</h1>
         
 
         <div class="post-meta">
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k
+                  996
                 </span>
               
 
@@ -435,10 +435,10 @@
 
       
         <blockquote>
-<p>SQL整理总结</p>
+<p>HiveSql、PostgreSql、Hadoop命令</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="ES"><a href="#ES" class="headerlink" title="ES"></a>ES</h1><h2 id="ES查询语句"><a href="#ES查询语句" class="headerlink" title="ES查询语句"></a>ES查询语句</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">count</span>(*)</span><br><span class="line"><span class="keyword">FROM</span> profile</span><br><span class="line"><span class="keyword">WHERE</span> str_34 = <span class="string">'男'</span></span><br><span class="line">  <span class="keyword">AND</span> str_35 = <span class="string">'18-19'</span></span><br><span class="line">  <span class="keyword">AND</span> set_10000188 &lt;&gt; <span class="string">'107103501'</span></span><br><span class="line">  <span class="keyword">AND</span> (str_10000132 = <span class="string">'2400-4400'</span></span><br><span class="line">       <span class="keyword">OR</span> str_10000132 = <span class="string">'&gt;4400'</span>)</span><br><span class="line">  <span class="keyword">AND</span> map_10000198.BRN1856DSP001M2 &gt; <span class="string">'0'</span> <span class="keyword">LIMIT</span></span><br></pre></td></tr></table></figure>
+<h1 id="ES"><a href="#ES" class="headerlink" title="ES"></a>ES</h1><h2 id="ES查询语句"><a href="#ES查询语句" class="headerlink" title="ES查询语句"></a>ES查询语句</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">count</span>(*)</span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`table_name`</span></span><br><span class="line"><span class="keyword">WHERE</span> column1 = <span class="string">'xxx'</span></span><br><span class="line">  <span class="keyword">AND</span> map_column2.xxx &gt; <span class="string">'0'</span> <span class="keyword">LIMIT</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
 <h1 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h1><h2 id="HIVE查询map中的key是否存在"><a href="#HIVE查询map中的key是否存在" class="headerlink" title="HIVE查询map中的key是否存在"></a>HIVE查询map中的key是否存在</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`table_name`</span></span><br><span class="line"><span class="keyword">WHERE</span> array_contains(map_keys(column1),<span class="string">'xxx'</span>) <span class="keyword">LIMIT</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
 <h2 id="HIVE查询数组中的key是否存在"><a href="#HIVE查询数组中的key是否存在" class="headerlink" title="HIVE查询数组中的key是否存在"></a>HIVE查询数组中的key是否存在</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> <span class="string">`table_name`</span></span><br><span class="line"><span class="keyword">WHERE</span> ARRAY_CONTAINS(column1, <span class="string">'xxx'</span>) <span class="keyword">LIMIT</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
 <h2 id="union语句"><a href="#union语句" class="headerlink" title="union语句"></a>union语句</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> c.column1,</span><br><span class="line">       c.column2</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  (<span class="keyword">SELECT</span> column1,</span><br><span class="line">          <span class="keyword">CASE</span> column2</span><br><span class="line">              <span class="keyword">WHEN</span> <span class="string">'a'</span> <span class="keyword">THEN</span> <span class="string">'A'</span></span><br><span class="line">              <span class="keyword">WHEN</span> <span class="string">'b'</span> <span class="keyword">THEN</span> <span class="string">'B'</span></span><br><span class="line">          <span class="keyword">END</span> <span class="keyword">AS</span> column2</span><br><span class="line">   <span class="keyword">FROM</span> <span class="string">`table_name`</span></span><br><span class="line">   <span class="keyword">UNION</span> ALL <span class="keyword">SELECT</span> column1,</span><br><span class="line">                    column2</span><br><span class="line">   <span class="keyword">FROM</span> <span class="string">`table_name`</span> )c <span class="keyword">LIMIT</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
