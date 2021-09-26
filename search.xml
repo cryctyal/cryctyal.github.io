@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>90后的动漫回忆</title>
-    <url>/2021/07/21/90%E5%90%8E%E7%9A%84%E5%8A%A8%E6%BC%AB%E5%9B%9E%E5%BF%86/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>测试</p>
-<a id="more"></a>
-<hr>
-
-        <div id="aplayer-YyidSTUa" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;"></div>
-			  <script>
-				  var options = {"narrow":false,"autoplay":true,"showlrc":3,"mode":"random","music":[{"title":"黑猫警长","author":"主题曲","url":"http://m10.music.126.net/20210722235534/077ad2dea731e03578bc4049ff53b9d8/ymusic/caf9/d3e4/38fa/9a9315815e9c554e61ae9621d9b249af.mp3","pic":"https://link.jscdn.cn/189/aHR0cHM6Ly9jbG91ZC4xODkuY24vd2ViL3NoYXJlP2NvZGU9eTJJWnp1VmppVWp1.jpg","lrc":""},{"title":"中华小当家","author":"主题曲","url":"http://m10.music.126.net/20210722235722/ac8452a69f0dc26d96980ca8090b1de0/ymusic/226a/6659/7300/d716b431f3034c6ca82246f4c997d47b.mp3","pic":"https://link.jscdn.cn/189/aHR0cHM6Ly9jbG91ZC4xODkuY24vd2ViL3NoYXJlP2NvZGU9Ym1hbW1ldmVBWnZ1.jpg","lrc":""},{"title":"猫眼三姐妹","author":"主题曲","url":"http://m10.music.126.net/20210722235805/8a9398b3c36b40f867fe12f6c46e2c18/ymusic/17c2/5a2a/7f90/e379c30aea049cfc10271a843703e18e.mp3","pic":"","lrc":""},{"title":"七龙珠","author":"主题曲","url":"http://m10.music.126.net/20210722235827/d5452d3f6a68c0a7172880e958626822/ymusic/fe70/5e3d/ece9/a3127d19fc9d9021914ccb1b55358c88.mp3","pic":"","lrc":""},{"title":"新世纪福音战士","author":"主题曲","url":"http://m10.music.126.net/20210722235842/199c8dd8e85c1999d5cb3d7ce957064b/ymusic/1293/2fd3/0871/5c5be499aefc0d0be75c44bd164ce2fd.mp3","pic":"","lrc":""},{"title":"四驱兄弟","author":"主题曲","url":"http://m10.music.126.net/20210722235906/de4a250e3e4eed79be4dff3c634a007e/ymusic/c60d/3222/9650/0d11adf82db4b9f5ac93657157fd761d.mp3","pic":"","lrc":""},{"title":"小鲤鱼历险记","author":"主题曲","url":"http://m801.music.126.net/20210722235919/30c363610f64db281c38fee7362304f8/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/7811897960/1c5c/1922/cf33/b2d3fb24932a92e07d88d5458509610a.mp3","pic":"","lrc":""},{"title":"我为歌狂","author":"主题曲","url":"http://m10.music.126.net/20210722235939/f8c89f71eb7462bcf3b5e219719304c9/ymusic/363e/ce22/8c8f/6909f853d2dabeaedc01d550e46679b1.mp3","pic":"","lrc":""},{"title":"我为歌狂","author":"主题曲","url":"http://m10.music.126.net/20210722235939/5a77c93534abea6671e274b6e3950e68/ymusic/49f4/3132/de63/1ffda62ce4fb4d58ebaf0dd1382b6e5f.mp3","pic":"","lrc":""}]};
-				  options.element = document.getElementById("aplayer-YyidSTUa");
-				  var ap = new APlayer(options);
-			    window.aplayers || (window.aplayers = []);
-				  window.aplayers.push(ap);
-			  </script>]]></content>
-  </entry>
-  <entry>
     <title>IaaS、PaaS、SaaS的区别</title>
     <url>/2018/06/04/IaaS%E3%80%81PaaS%E3%80%81SaaS/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
@@ -58,54 +42,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Kafka学习(一)</title>
-    <url>/2018/08/01/Kafka%E5%AD%A6%E4%B9%A0(%E4%B8%80)/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
-<p>Kafka是什么？</p>
-</blockquote>
-<a id="more"></a>
-<hr>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Kafka最初由<code>Linkedin</code>公司开发，是一个分布式、支持分区的、多副本的，基于zookeeper协调的分布式消息系统，它的最大的特性就是可以实时的处理大量数据以满足各种需求场景：比如基于hadoop的批处理系统、低延迟的实时系统、storm/Spark流式处理引擎，web/nginx日志、访问日志，消息服务等等，用scala语言编写，Linkedin于2010年贡献给了Apache基金会并成为顶级开源项目。</p>
-<h2 id="Kafka是什么？"><a href="#Kafka是什么？" class="headerlink" title="Kafka是什么？"></a>Kafka是什么？</h2><ul>
-<li>Kafka是一个流平台，在Kafka上可以发布和订阅流数据，并把它们保存起来、进行处理。</li>
-<li>Kafka是一个分布式系统[^分布式系统]，以集群(支持自由伸缩)的方式运行，所以我们总称为分布式消息队列。</li>
-<li>Kafka可以用来存储数据，数据存储的时间长短由你自己定义，并且只要数据还存储在Kafka中，你可以重复读取。</li>
-<li>Kafka可以看成是实时版的Hadoop：<ol>
-<li>Hadoop可以存储和定期处理大量的数据文件，而Kafka而可以存储和持续型的处理大型的数据流。</li>
-<li>Hadoop主要应用于数据分析上，而Kafka因其低延迟的特点更合适应用于核心业务上，业务事件发生时，Kafka能够针对这些事件及时做出相应。</li>
-</ol>
-</li>
-</ul>
-<h2 id="kafka的核心思想"><a href="#kafka的核心思想" class="headerlink" title="kafka的核心思想"></a>kafka的核心思想</h2><p>Kafka的核心思想就是把消息全部存成一个有序日志，所有的Producer把消息发布到底端，从某一个逻辑上的位移开始顺序读取所有的消息。</p>
-<p><img src="1.png" alt></p>
-<h2 id="Kafka集群结构"><a href="#Kafka集群结构" class="headerlink" title="Kafka集群结构"></a>Kafka集群结构</h2><p>我们看下一Kafka的集群架构，如下图：<br><img src="2.png" alt></p>
-<p>首先有两个名词定义：Producer和Consumer</p>
-<ul>
-<li>Producer：向Kafka Topic发布消息的程序。</li>
-<li>Consumer：预订Topic并消费消息的程序。</li>
-</ul>
-<p>这里又引出了Topic的定义：</p>
-<ul>
-<li>Topic：Kafka将消息以Topic为单位进行归纳，即消息的目录/主题。 </li>
-</ul>
-<p><strong>讲个故事</strong></p>
-<blockquote>
-<p>我们平时看的知乎，里面有一些知乎主题，大家把与主题相关的内容都发布这个主题板块，如果你喜欢这个主题，可以点击关注主题，这样可以得到主题的最新的消息。<br>有一天，老师让大家做一个关于中国历史各朝代皇帝的研究，同学们需要去寻找资料。大家发现知乎上有很多类似的话题，有商朝的，有唐朝的，有明朝的……每个朝代都分成了一个个主题，于是大家决定分配，每个人一个主题去研究。</p>
-<ul>
-<li>这里知乎的主题相当于Kafka的Topic，是一堆消息的集合或者说是分类</li>
-<li>在主题中发布内容的大牛相当于Kafka的Producer。</li>
-<li>订阅主题，接受消息的学生相当于Kafka的Consumer。<br><strong>注意：有一个区别是知乎中的用户是被动推送的消息的，而Kafka中的Consumer是主动拉取消息的，这个我们后面会具体阐述。</strong></li>
-</ul>
-</blockquote>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>Kafka</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Kafka学习(三)</title>
     <url>/2018/09/29/Kafka%E5%AD%A6%E4%B9%A0(%E4%B8%89)/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
@@ -144,6 +80,54 @@
 <li>可是有的小组同学人数不够，或者皇帝太多了怎么办呢？那就学习能力强的学霸多研究一些<code>（同一个组里的一个Consumer可以消费多个Partition）</code></li>
 <li>学霸能力强，但是研究的数量比较多，效率肯定会有折扣，肯定比不上专心致志研究一位皇帝的同学。<code>（消费效率最高的情况是Partition和Consumer数量相同。这样确保每个Consumer专职负责一个Partition。）</code></li>
 <li>由于这种分配方式，小组内的同学肯定不会比被研究的皇帝还多，否则会有同学没有研究任务的情况出现。<code>（Consumer数量不能大于Partition数量。）</code></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Kafka</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Kafka学习(一)</title>
+    <url>/2018/08/01/Kafka%E5%AD%A6%E4%B9%A0(%E4%B8%80)/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
+<p>Kafka是什么？</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Kafka最初由<code>Linkedin</code>公司开发，是一个分布式、支持分区的、多副本的，基于zookeeper协调的分布式消息系统，它的最大的特性就是可以实时的处理大量数据以满足各种需求场景：比如基于hadoop的批处理系统、低延迟的实时系统、storm/Spark流式处理引擎，web/nginx日志、访问日志，消息服务等等，用scala语言编写，Linkedin于2010年贡献给了Apache基金会并成为顶级开源项目。</p>
+<h2 id="Kafka是什么？"><a href="#Kafka是什么？" class="headerlink" title="Kafka是什么？"></a>Kafka是什么？</h2><ul>
+<li>Kafka是一个流平台，在Kafka上可以发布和订阅流数据，并把它们保存起来、进行处理。</li>
+<li>Kafka是一个分布式系统[^分布式系统]，以集群(支持自由伸缩)的方式运行，所以我们总称为分布式消息队列。</li>
+<li>Kafka可以用来存储数据，数据存储的时间长短由你自己定义，并且只要数据还存储在Kafka中，你可以重复读取。</li>
+<li>Kafka可以看成是实时版的Hadoop：<ol>
+<li>Hadoop可以存储和定期处理大量的数据文件，而Kafka而可以存储和持续型的处理大型的数据流。</li>
+<li>Hadoop主要应用于数据分析上，而Kafka因其低延迟的特点更合适应用于核心业务上，业务事件发生时，Kafka能够针对这些事件及时做出相应。</li>
+</ol>
+</li>
+</ul>
+<h2 id="kafka的核心思想"><a href="#kafka的核心思想" class="headerlink" title="kafka的核心思想"></a>kafka的核心思想</h2><p>Kafka的核心思想就是把消息全部存成一个有序日志，所有的Producer把消息发布到底端，从某一个逻辑上的位移开始顺序读取所有的消息。</p>
+<p><img src="1.png" alt></p>
+<h2 id="Kafka集群结构"><a href="#Kafka集群结构" class="headerlink" title="Kafka集群结构"></a>Kafka集群结构</h2><p>我们看下一Kafka的集群架构，如下图：<br><img src="2.png" alt></p>
+<p>首先有两个名词定义：Producer和Consumer</p>
+<ul>
+<li>Producer：向Kafka Topic发布消息的程序。</li>
+<li>Consumer：预订Topic并消费消息的程序。</li>
+</ul>
+<p>这里又引出了Topic的定义：</p>
+<ul>
+<li>Topic：Kafka将消息以Topic为单位进行归纳，即消息的目录/主题。 </li>
+</ul>
+<p><strong>讲个故事</strong></p>
+<blockquote>
+<p>我们平时看的知乎，里面有一些知乎主题，大家把与主题相关的内容都发布这个主题板块，如果你喜欢这个主题，可以点击关注主题，这样可以得到主题的最新的消息。<br>有一天，老师让大家做一个关于中国历史各朝代皇帝的研究，同学们需要去寻找资料。大家发现知乎上有很多类似的话题，有商朝的，有唐朝的，有明朝的……每个朝代都分成了一个个主题，于是大家决定分配，每个人一个主题去研究。</p>
+<ul>
+<li>这里知乎的主题相当于Kafka的Topic，是一堆消息的集合或者说是分类</li>
+<li>在主题中发布内容的大牛相当于Kafka的Producer。</li>
+<li>订阅主题，接受消息的学生相当于Kafka的Consumer。<br><strong>注意：有一个区别是知乎中的用户是被动推送的消息的，而Kafka中的Consumer是主动拉取消息的，这个我们后面会具体阐述。</strong></li>
 </ul>
 </blockquote>
 ]]></content>
@@ -292,12 +276,12 @@
 <h2 id="四、延展性"><a href="#四、延展性" class="headerlink" title="四、延展性"></a>四、延展性</h2><p>如下图，Kafka提供Topic以及Partitions。每个用户有不同的Topic，每个Topic可以有多个Partitions，每个Partitions可被装载在不同的机器上。当用户提高规模之后，Kafka 只需要简单地增加机器和 Topic Partitions 数量，即可达到线性延展方式。<br><img src="7.png" alt></p>
 <hr>
 
-        <div id="aplayer-iWdrxqzC" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-iCBQkkhV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-iWdrxqzC"),
+            element: document.getElementById("aplayer-iCBQkkhV"),
             narrow: false,
             autoplay: true,
             showlrc: false,
